@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, Scissors, Palette, Sparkles, Heart } from 'lucide-react';
+import { SALON_IMAGES } from '../utils/images';
+import { LazyImage } from './LazyImage';
 
 interface PinnedShowcaseProps {
   onOpenBookingModal: () => void;
@@ -13,7 +15,8 @@ const PINNED_ITEMS = [
     title: 'HAIR',
     subtitle: 'Tailored Cuts & Textures',
     description: 'Bespoke unisex cuts shaped to your face, texture, and everyday lifestyle. Precision scissors and artistic razors.',
-    image: '/src/assets/images/infinity_hero_styling_1790420043245.jpg',
+    image: SALON_IMAGES.hero,
+    fallbackKey: 'hero' as const,
     icon: Scissors,
   },
   {
@@ -21,7 +24,8 @@ const PINNED_ITEMS = [
     title: 'COLOUR',
     subtitle: 'Dimensional Shading & Balayage',
     description: 'Luminous multidimensional hair color, sunlit highlights, and gentle glosses formulated to preserve natural hair health.',
-    image: '/src/assets/images/infinity_hair_color_1790420058500.jpg',
+    image: SALON_IMAGES.hairColor,
+    fallbackKey: 'hairColor' as const,
     icon: Palette,
   },
   {
@@ -29,7 +33,8 @@ const PINNED_ITEMS = [
     title: 'STYLE',
     subtitle: 'Volume Blowouts & Keratin Glass',
     description: 'Silky smooth keratin smoothing and bouncy blowouts that resist Gujarat humidity and leave an unforgettable mirror shine.',
-    image: '/src/assets/images/infinity_salon_interior_1790420024360.jpg',
+    image: SALON_IMAGES.keratin,
+    fallbackKey: 'keratin' as const,
     icon: Sparkles,
   },
   {
@@ -37,7 +42,8 @@ const PINNED_ITEMS = [
     title: 'BEAUTY',
     subtitle: 'Skin Glow & Bridal Perfection',
     description: 'Refreshing facial therapies, clean threading, hot towel beard grooming, and bridal looks crafted for special memories.',
-    image: '/src/assets/images/infinity_bridal_look_1790420075472.jpg',
+    image: SALON_IMAGES.bridal,
+    fallbackKey: 'bridal' as const,
     icon: Heart,
   },
 ];
@@ -146,12 +152,12 @@ export const PinnedShowcase: React.FC<PinnedShowcaseProps> = ({ onOpenBookingMod
                 idx === activeIndex ? 'opacity-30' : 'opacity-0 pointer-events-none'
               }`}
             >
-              <img
+              <LazyImage
                 src={item.image}
+                fallbackKey={item.fallbackKey}
                 alt={item.title}
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover object-center"
-                loading="lazy"
-                decoding="async"
               />
             </div>
           ))}
@@ -220,23 +226,31 @@ export const PinnedShowcase: React.FC<PinnedShowcaseProps> = ({ onOpenBookingMod
 
           {/* Right Column: Visual Frame */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/15 shadow-xl bg-black">
+            <div
+              style={{ aspectRatio: '4 / 5' }}
+              className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-white/15 shadow-xl bg-black"
+            >
               {PINNED_ITEMS.map((item, idx) => (
-                <img
+                <div
                   key={item.title}
-                  src={item.image}
-                  alt={item.title}
-                  className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ease-out ${
+                  className={`absolute inset-0 transition-opacity duration-500 ease-out ${
                     idx === activeIndex
-                      ? 'opacity-100'
-                      : 'opacity-0 pointer-events-none'
+                      ? 'opacity-100 z-1'
+                      : 'opacity-0 pointer-events-none z-0'
                   }`}
-                  loading="lazy"
-                  decoding="async"
-                />
+                >
+                  <LazyImage
+                    src={item.image}
+                    fallbackKey={item.fallbackKey}
+                    alt={item.title}
+                    aspectRatio="4 / 5"
+                    containerClassName="w-full h-full"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
               ))}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-6 left-6 right-6 text-left">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none z-2" />
+              <div className="absolute bottom-6 left-6 right-6 text-left z-3">
                 <span className="text-[10px] uppercase tracking-widest text-[#C9A96A] font-semibold block">
                   Studio Craft
                 </span>

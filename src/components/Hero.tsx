@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Star, MapPin, Phone, ArrowUpRight, Sparkles, Clock } from 'lucide-react';
 import { SALON_INFO } from '../data/salonData';
+import { SALON_IMAGES, handleImageError } from '../utils/images';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -303,11 +304,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal, introDone }) => 
               {/* Main Vertical Editorial Image with Clip Mask */}
               <div
                 ref={imageWrapperRef}
+                style={{ aspectRatio: '3 / 4' }}
                 className="relative rounded-3xl overflow-hidden aspect-[3/4] shadow-[0_12px_36px_rgba(0,0,0,0.06)] bg-[#F3EFE8]"
               >
                 <img
                   ref={imageElementRef}
-                  src="/src/assets/images/infinity_hero_styling_1790420043245.jpg"
+                  src={SALON_IMAGES.hero}
+                  onError={(e) => handleImageError(e, 'hero')}
                   alt="Modern haircut and styling at Infinity The Unisex Salon"
                   className="w-full h-full object-cover object-center"
                   loading="eager"

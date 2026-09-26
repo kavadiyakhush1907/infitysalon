@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_ITEMS } from '../data/salonData';
+import { handleImageError } from '../utils/images';
+import { LazyImage } from './LazyImage';
 import gsap from 'gsap';
 
 export const Gallery: React.FC = () => {
@@ -116,14 +118,16 @@ export const Gallery: React.FC = () => {
             <div
               key={item.id}
               onClick={() => handleOpenLightbox(index)}
+              style={{ aspectRatio: '4 / 5' }}
               className="gallery-card group relative rounded-3xl overflow-hidden aspect-[4/4] sm:aspect-[4/5] bg-[#222222] cursor-pointer shadow-[0_4px_16px_rgba(0,0,0,0.03)]"
             >
-              <img
+              <LazyImage
                 src={item.image}
+                fallbackKey="salon"
                 alt={item.title}
+                aspectRatio="4 / 5"
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-108"
-                loading="lazy"
-                decoding="async"
               />
 
               {/* Hover Overlay */}
@@ -189,7 +193,10 @@ export const Gallery: React.FC = () => {
           >
             <img
               src={filteredItems[selectedIdx].image}
+              onError={(e) => handleImageError(e, 'salon')}
               alt={filteredItems[selectedIdx].title}
+              loading="lazy"
+              decoding="async"
               className="max-w-full max-h-[80vh] w-auto h-auto object-contain mx-auto"
             />
             <div className="p-4 bg-black/85 text-left text-white flex items-center justify-between">

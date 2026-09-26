@@ -1,3 +1,5 @@
+import { SALON_IMAGES } from '../utils/images';
+
 export interface ServiceItem {
   id: string;
   number: string;
@@ -192,21 +194,21 @@ export const FEATURED_SERVICES = [
     title: "HAIR COLOUR",
     tagline: "Refresh your look with a colour made for you.",
     description: "From warm balayage and sunlit blondes to rich chocolate brunettes and seamless gray blending.",
-    image: "/src/assets/images/infinity_hair_color_1790420058500.jpg",
+    image: SALON_IMAGES.hairColor,
     number: "01"
   },
   {
     title: "KERATIN",
     tagline: "Smooth, manageable and beautifully finished hair.",
     description: "Eliminate stubborn frizz and lock in mirror-like shine for weeks of effortless styling.",
-    image: "/src/assets/images/infinity_salon_interior_1790420024360.jpg",
+    image: SALON_IMAGES.keratin,
     number: "02"
   },
   {
     title: "BRIDAL",
     tagline: "Elegant styling for your special moments.",
     description: "Timeless hair designs, radiant bridal grooming, and complete occasion elegance tailored for you.",
-    image: "/src/assets/images/infinity_bridal_look_1790420075472.jpg",
+    image: SALON_IMAGES.bridal,
     number: "03"
   }
 ];
@@ -240,7 +242,7 @@ export const GALLERY_ITEMS = [
     title: "Infinity Salon Floor",
     category: "Interior",
     tag: "interior",
-    image: "/src/assets/images/infinity_salon_interior_1790420024360.jpg",
+    image: SALON_IMAGES.interior,
     aspect: "tall"
   },
   {
@@ -248,7 +250,7 @@ export const GALLERY_ITEMS = [
     title: "Modern Haircut & Styling",
     category: "Hair Styles",
     tag: "hairstyles",
-    image: "/src/assets/images/infinity_hero_styling_1790420043245.jpg",
+    image: SALON_IMAGES.hero,
     aspect: "wide"
   },
   {
@@ -256,7 +258,7 @@ export const GALLERY_ITEMS = [
     title: "Dimensional Hair Colour",
     category: "Hair Colour",
     tag: "haircolour",
-    image: "/src/assets/images/infinity_hair_color_1790420058500.jpg",
+    image: SALON_IMAGES.hairColor,
     aspect: "square"
   },
   {
@@ -264,7 +266,7 @@ export const GALLERY_ITEMS = [
     title: "Bridal Elegance",
     category: "Bridal",
     tag: "bridal",
-    image: "/src/assets/images/infinity_bridal_look_1790420075472.jpg",
+    image: SALON_IMAGES.bridal,
     aspect: "tall"
   },
   {
@@ -272,7 +274,7 @@ export const GALLERY_ITEMS = [
     title: "L'Oréal Professional Bar",
     category: "Interior",
     tag: "interior",
-    image: "/src/assets/images/infinity_salon_interior_1790420024360.jpg",
+    image: SALON_IMAGES.interior,
     aspect: "square"
   },
   {
@@ -280,7 +282,7 @@ export const GALLERY_ITEMS = [
     title: "Precision Cut & Finish",
     category: "Hair Styles",
     tag: "hairstyles",
-    image: "/src/assets/images/infinity_hero_styling_1790420043245.jpg",
+    image: SALON_IMAGES.haircut,
     aspect: "wide"
   }
 ];

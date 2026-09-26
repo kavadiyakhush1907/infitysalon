@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Star, Users, Scissors, Award, Check } from 'lucide-react';
+import { SALON_IMAGES, handleImageError } from '../utils/images';
+import { LazyImage } from './LazyImage';
 import gsap from 'gsap';
 
 export const About: React.FC = () => {
@@ -168,15 +170,17 @@ export const About: React.FC = () => {
           <div className="lg:col-span-5">
             <div
               ref={imageFrameRef}
-              className="relative rounded-3xl overflow-hidden shadow-md bg-[#F3EFE8] group border border-[#222222]/8 h-80 sm:h-96"
+              style={{ aspectRatio: '4 / 3' }}
+              className="relative rounded-3xl overflow-hidden shadow-md bg-[#F3EFE8] group border border-[#222222]/8 aspect-[4/3] w-full"
             >
-              <img
+              <LazyImage
                 ref={imageRef}
-                src="/src/assets/images/infinity_salon_interior_1790420024360.jpg"
+                src={SALON_IMAGES.interior}
                 alt="Infinity The Unisex Salon interior in Kudasan Gandhinagar"
-                className="w-full h-full object-cover object-center"
-                loading="lazy"
-                decoding="async"
+                fallbackKey="salon"
+                containerClassName="w-full h-full"
+                className="w-full h-full object-cover object-center scale-105"
+                aspectRatio="4 / 3"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-5 right-5 text-white text-left z-10">

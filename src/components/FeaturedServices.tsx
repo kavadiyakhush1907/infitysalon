@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { FEATURED_SERVICES, ServiceItem, SERVICES } from '../data/salonData';
+import { LazyImage } from './LazyImage';
 import gsap from 'gsap';
 
 interface FeaturedServicesProps {
@@ -75,15 +76,17 @@ export const FeaturedServices: React.FC<FeaturedServicesProps> = ({ onSelectServ
             <div
               key={item.title}
               onClick={() => handleFeatureClick(item.title)}
+              style={{ aspectRatio: '4 / 5' }}
               className="group relative rounded-3xl overflow-hidden aspect-[4/5] shadow-[0_6px_20px_rgba(0,0,0,0.05)] bg-[#222222] cursor-pointer text-left flex flex-col justify-end p-6 sm:p-7"
             >
               {/* Background Image with Zoom */}
-              <img
+              <LazyImage
                 src={item.image}
+                fallbackKey="salon"
                 alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-108 opacity-90 group-hover:opacity-100"
-                loading="lazy"
-                decoding="async"
+                aspectRatio="4 / 5"
+                containerClassName="absolute inset-0 w-full h-full"
+                className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-108 opacity-90 group-hover:opacity-100"
               />
 
               {/* Gradient Overlay for Legibility */}
